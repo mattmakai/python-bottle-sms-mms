@@ -3,26 +3,30 @@ from twilio import twiml
 from twilio.rest import TwilioRestClient
 
 
+client = TwilioRestClient()
+
+# this URL variable can be dynamic or customized later
+MMS_URL = "https://wiki.factorio.com/images/Fast_transport_belt_fulldensity.gif"
+
+
 @route('/')
 def check_app():
     # returns a simple string stating the app is working
     return "Bottle web app up and running!"
 
 
-@route('/sendsms/<to_number>/<from_number>/<message_body>/')
-def outbound_sms(message_body):
+@route('/send-sms/<to_number>/<from_number>/<message_body>/')
+def outbound_sms(to_number, from_number, message_body):
     client.messages.create(to=to_number, from_=from_number,
                            body=message_body)
     # this response is sent back to the web browser client
     return "SMS sent to " + to_number
 
 
-@route('/sendmms/<message_body>/')
-def outbound_mms(message_body):
-    # this URL variable can be dynamic or customized later
-    MMS_MEDIA_URL = "https://media.giphy.com/media/Rvc2XOin8B9Zu/giphy.gif"
+@route('/send-mms/<to_number>/<from_number>/<message_body>/')
+def outbound_mms(to_number, from_number, message_body):
     client.messages.create(to=to_number, from_=from_number,
-                           body=message_body, media_url=MMS_MEDIA_URL)
+                           body=message_body, media_url=MMS_URL)
     return "MMS sent to " + to_number
 
 
