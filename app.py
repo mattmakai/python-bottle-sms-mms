@@ -17,6 +17,8 @@ def check_app():
 
 @route('/send-sms/<to_number>/<from_number>/<message_body>/')
 def outbound_sms(to_number, from_number, message_body):
+    # use the Twilio helper library to send an outbound SMS
+    # via the REST API
     client.messages.create(to=to_number, from_=from_number,
                            body=message_body)
     # this response is sent back to the web browser client
@@ -25,6 +27,8 @@ def outbound_sms(to_number, from_number, message_body):
 
 @route('/send-mms/<to_number>/<from_number>/<message_body>/')
 def outbound_mms(to_number, from_number, message_body):
+    # uses the Twilio helper library to send an outbound MMS
+    # via the REST API
     client.messages.create(to=to_number, from_=from_number,
                            body=message_body, media_url=MMS_URL)
     return "MMS sent to " + to_number
@@ -47,4 +51,5 @@ def inbound_sms():
 
 
 if __name__ == '__main__':
+    # use the Bottle framework run function to start the development server
     run(host='127.0.0.1', port=5000, debug=True, reloader=True)
