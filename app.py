@@ -3,7 +3,8 @@ from twilio import twiml
 from twilio.rest import TwilioRestClient
 
 
-client = TwilioRestClient()
+# copy in your Twilio Account SID and Auth Token from Twilio Console
+client = TwilioRestClient("your account sid", "your auth token")
 
 # this URL variable can be dynamic or customized later
 MMS_URL = "https://wiki.factorio.com/images/Fast_transport_belt_fulldensity.gif"
