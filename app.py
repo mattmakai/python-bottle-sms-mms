@@ -44,7 +44,7 @@ def inbound_sms():
     # we can use the incoming message text in a condition statement
     if inbound_message == "Hello":
         response_message = "Well, hello right back at ya!"
-    twiml_response.message("Hello from Bottle right back at you!")
+    twiml_response.message(response_message)
     # we return back the mimetype because Twilio needs an XML response
     response.content_type = "application/xml"
     return str(twiml_response)
