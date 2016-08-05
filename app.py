@@ -35,7 +35,7 @@ def outbound_mms(to_number, from_number, message_body):
     return "MMS sent to " + to_number
 
 
-@post('/twilio-webhook')
+@post('/twilio')
 def inbound_sms():
     twiml_response = twiml.Response()
     # obtain message body from the request. could also get the "To" and 
